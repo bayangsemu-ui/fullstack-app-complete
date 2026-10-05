@@ -1,470 +1,694 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repository Portfolio - Bayangsemu UI</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bayangsemu UI | Repository Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio repository showcase for Bayangsemu UI. Explore projects spanning DevOps, full-stack development, and AI security tooling."
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      :root {
+        --bg-1: #0f172a;
+        --bg-2: #111827;
+        --bg-3: #1f2937;
+        --card: rgba(15, 23, 42, 0.72);
+        --card-strong: rgba(17, 24, 39, 0.9);
+        --text: #e5eefb;
+        --muted: #aebbd5;
+        --primary: #8b5cf6;
+        --primary-2: #6366f1;
+        --primary-3: #14b8a6;
+        --success: #34d399;
+        --warning: #fbbf24;
+        --danger: #f87171;
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: rgba(15, 23, 42, 0.4);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(139, 92, 246, 0.15), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(20, 184, 166, 0.15), transparent 30%),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 20px 80px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0 32px;
+        position: sticky;
+        top: 0;
+        background: rgba(15, 23, 42, 0.35);
+        backdrop-filter: blur(14px);
+        z-index: 20;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.45);
+        font-size: 1.25rem;
+      }
+
+      .nav {
+        display: flex;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.4fr 0.8fr;
+        align-items: center;
+        gap: 32px;
+        padding: 50px 0 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.05;
+        margin: 0 0 18px;
+      }
+
+      h1 .accent {
+        background: linear-gradient(135deg, #c084fc, #67e8f9);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.8;
+        max-width: 630px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 22px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        border: none;
+        box-shadow: 0 20px 35px rgba(99, 102, 241, 0.35);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .hero-card {
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.65));
+        box-shadow: 0 22px 44px var(--shadow);
+      }
+
+      .mini-panel {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+
+      .mini-panel:last-child {
+        margin-bottom: 0;
+      }
+
+      .mini-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 10px rgba(52, 211, 153, 0.8);
+      }
+
+      .stat-num {
+        font-size: clamp(1.5rem, 4vw, 2.3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(120px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px 14px;
+        text-align: center;
+      }
+
+      .stat-box .value {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+
+      .stat-box .label {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .section {
+        margin-top: 32px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        margin: 0;
+      }
+
+      .section-head span {
+        color: var(--muted);
+      }
+
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(300px, 1fr));
+        gap: 24px;
+      }
+
+      .repo-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.38);
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+
+      .repo-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(139, 92, 246, 0.6);
+      }
+
+      .repo-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .repo-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: 1.5rem;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.3));
+        border: 1px solid rgba(139, 92, 246, 0.4);
+      }
+
+      .repo-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        word-break: break-word;
+      }
+
+      .repo-description {
+        color: var(--muted);
+        line-height: 1.7;
+        min-height: 88px;
+        font-size: 0.96rem;
+      }
+
+      .repo-id {
+        margin: 18px 0 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        font-family: "Consolas", monospace;
+      }
+
+      .language-list {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .lang-row {
+        display: grid;
+        grid-template-columns: 110px minmax(90px, 1fr);
+        align-items: center;
+        gap: 12px;
+      }
+
+      .lang-row .label {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .bar-track {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        overflow: hidden;
+        height: 22px;
+      }
+
+      .bar-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: inherit;
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(90deg, #8b5cf6, #6366f1);
+        min-width: 42px;
+      }
+
+      .repo-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 6px 8px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        color: #d9d3ff;
+      }
+
+      .repo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-weight: 600;
+        transition: background 0.2s ease;
+      }
+
+      .repo-link:hover {
+        background: rgba(139, 92, 246, 0.18);
+      }
+
+      .empty {
+        padding: 18px 12px;
+        text-align: center;
+        border-radius: 12px;
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      footer {
+        margin-top: 48px;
+        padding: 24px 0 8px;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .socials {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .socials a {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+        .repo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+          padding-top: 12px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .repos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .repo-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.6s ease-out backwards;
-        }
-
-        .repo-card:nth-child(1) { animation-delay: 0.1s; }
-        .repo-card:nth-child(2) { animation-delay: 0.2s; }
-        .repo-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .repo-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .repo-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-
-        .repo-icon {
-            font-size: 2em;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            color: white;
-        }
-
-        .repo-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333;
-            word-break: break-word;
-        }
-
-        .repo-description {
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            min-height: 60px;
-        }
-
-        .repo-id {
-            background: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            color: #666;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-            word-break: break-all;
-        }
-
-        .languages {
-            margin-bottom: 20px;
-        }
-
-        .languages-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-        }
-
-        .language-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            gap: 10px;
-        }
-
-        .language-name {
-            width: 120px;
-            font-size: 0.9em;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .language-bar {
-            flex: 1;
-            height: 20px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .language-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75em;
-            font-weight: bold;
-            min-width: 40px;
-        }
-
-        .repo-meta {
-            display: flex;
-            gap: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            font-size: 0.85em;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #666;
-        }
-
-        .meta-item strong {
-            color: #333;
-        }
-
-        .repo-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        .repo-link:hover {
-            transform: scale(1.05);
-        }
-
-        .stats {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            color: white;
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease-out;
+        .nav {
+          flex-wrap: wrap;
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+          grid-template-columns: 1fr;
         }
 
-        .stat-item {
-            text-align: center;
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
         }
 
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            display: block;
+        .lang-row {
+          grid-template-columns: 1fr;
         }
-
-        .stat-label {
-            font-size: 1em;
-            opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            color: white;
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            opacity: 0.8;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            background: #667eea;
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
-        .no-languages {
-            color: #999;
-            font-style: italic;
-            padding: 15px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .repos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .repo-card {
-                padding: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>🚀 Repository Portfolio</h1>
-            <p>Bayangsemu UI - GitHub Projects Showcase</p>
-        </header>
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">B</div>
+          <span>Bayangsemu UI</span>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#overview">Overview</a>
+          <a href="#repositories">Repositories</a>
+          <a href="#about">About</a>
+        </nav>
+      </header>
 
-        <!-- Stats Section -->
-        <div class="stats">
+      <main>
+        <section id="overview" class="hero">
+          <div>
+            <div class="eyebrow">⚡ Developer Portfolio</div>
+            <h1>
+              Building <span class="accent">modern systems</span> with code, automation, and AI.
+            </h1>
+            <p class="lead">
+              I focus on practical engineering work across full-stack development, cloud environments,
+              automation, security tooling, and local AI-powered workflows. This portfolio highlights
+              a few of the repositories that reflect that range of work.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#repositories">Explore Repositories</a>
+              <a class="btn btn-secondary" href="https://github.com/bayangsemu-ui" target="_blank" rel="noreferrer">GitHub Profile</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="mini-panel">
+              <div class="mini-head">
+                <span>System Status</span>
+                <span class="dot"></span>
+              </div>
+              <div class="stat-num">3 active repos</div>
+            </div>
+
+            <div class="mini-panel">
+              <div class="mini-head">
+                <span>Focus Areas</span>
+                <span>⚙️</span>
+              </div>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Linux</span>
+                <span class="tag">AI</span>
+                <span class="tag">DevSecOps</span>
+              </div>
+            </div>
+
             <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Repositories</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Languages</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Active Development</span>
-                </div>
+              <div class="stat-box">
+                <span class="value">3</span>
+                <span class="label">Repos</span>
+              </div>
+              <div class="stat-box">
+                <span class="value">4</span>
+                <span class="label">Stacks</span>
+              </div>
+              <div class="stat-box">
+                <span class="value">∞</span>
+                <span class="label">Learning</span>
+              </div>
             </div>
+          </div>
+        </section>
+
+        <section id="repositories" class="section">
+          <div class="section-head">
+            <h2>Featured Repositories</h2>
+            <span>Selected public projects</span>
+          </div>
+
+          <div class="repo-grid">
+            <article class="repo-card">
+              <div class="repo-top">
+                <div class="repo-icon">🛠️</div>
+                <div class="repo-name">microsoft/vscode-remote-release</div>
+              </div>
+
+              <p class="repo-description">
+                Visual Studio Code Remote Development: Open any folder in WSL, in a Docker container, or on a remote machine using SSH and take advantage of VS Code's full feature set.
+              </p>
+
+              <div class="repo-id">ID: 177839194</div>
+
+              <div class="language-list">
+                <div class="lang-row">
+                  <div class="label">Dockerfile</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width: 100%;">100%</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="repo-footer">
+                <div class="tags">
+                  <span class="tag">VS Code</span>
+                  <span class="tag">Remote</span>
+                </div>
+                <a class="repo-link" href="https://github.com/microsoft/vscode-remote-release" target="_blank" rel="noreferrer">Open →</a>
+              </div>
+            </article>
+
+            <article class="repo-card">
+              <div class="repo-top">
+                <div class="repo-icon">⚛️</div>
+                <div class="repo-name">bayangsemu-ui/fullstack-app-complete</div>
+              </div>
+
+              <p class="repo-description">
+                Complete Full-Stack Application - React + Node.js + PostgreSQL with Auto Setup.
+              </p>
+
+              <div class="repo-id">ID: 1392452469</div>
+
+              <div class="language-list">
+                <div class="lang-row">
+                  <div class="label">JavaScript</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width: 88.7%;">88.7%</div>
+                  </div>
+                </div>
+                <div class="lang-row">
+                  <div class="label">Shell</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width: 6.9%; background: linear-gradient(90deg, #f59e0b, #ef4444);">6.9%</div>
+                  </div>
+                </div>
+                <div class="lang-row">
+                  <div class="label">CSS</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width: 3.2%; background: linear-gradient(90deg, #22c55e, #0ea5e9);">3.2%</div>
+                  </div>
+                </div>
+                <div class="lang-row">
+                  <div class="label">HTML</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width: 1.2%; background: linear-gradient(90deg, #10b981, #14b8a6);">1.2%</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="repo-footer">
+                <div class="tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Postgres</span>
+                </div>
+                <a class="repo-link" href="https://github.com/bayangsemu-ui/fullstack-app-complete" target="_blank" rel="noreferrer">Open →</a>
+              </div>
+            </article>
+
+            <article class="repo-card">
+              <div class="repo-top">
+                <div class="repo-icon">🤖</div>
+                <div class="repo-name">bayangsemu-ui/METATRON-power</div>
+              </div>
+
+              <p class="repo-description">
+                AI-powered penetration testing assistant using local LLM on Linux (Parrot OS).
+              </p>
+
+              <div class="repo-id">ID: 1390670038</div>
+
+              <div class="empty">Language composition data not available</div>
+
+              <div class="repo-footer">
+                <div class="tags">
+                  <span class="tag">AI</span>
+                  <span class="tag">Security</span>
+                  <span class="tag">Linux</span>
+                </div>
+                <a class="repo-link" href="https://github.com/bayangsemu-ui/METATRON-power" target="_blank" rel="noreferrer">Open →</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" class="section">
+          <div class="section-head">
+            <h2>About</h2>
+            <span>Technical direction</span>
+          </div>
+
+          <div class="repo-card" style="padding: 28px;">
+            <p class="lead" style="margin: 0; max-width: none; color: var(--text);">
+              I’m exploring the intersection of application development, infrastructure automation, and AI-assisted tooling.
+              My work spans end-to-end product building, reusable automation layers, and security-focused experimentation on Linux-based systems.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div>© 2024 Bayangsemu UI</div>
+        <div class="socials">
+          <a href="https://github.com/bayangsemu-ui" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://github.com/bayangsemu-ui?tab=repositories" target="_blank" rel="noreferrer">Repositories</a>
         </div>
-
-        <!-- Repositories Grid -->
-        <div class="repos-grid">
-            <!-- Repository 1: VSCode Remote -->
-            <div class="repo-card">
-                <div class="repo-header">
-                    <div class="repo-icon">🔧</div>
-                    <div class="repo-name">vscode-remote-release</div>
-                </div>
-                <p class="repo-description">
-                    Visual Studio Code Remote Development: Open any folder in WSL, in a Docker container, or on a remote machine using SSH and take advantage of VS Code's full feature set.
-                </p>
-                <div class="repo-id">
-                    <strong>ID:</strong> 177839194
-                </div>
-                <div class="languages">
-                    <div class="languages-title">📊 Language Composition</div>
-                    <div class="language-item">
-                        <span class="language-name">Dockerfile</span>
-                        <div class="language-bar">
-                            <div class="language-fill" style="width: 100%;">100%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="repo-meta">
-                    <div class="meta-item">
-                        <span>📦</span>
-                        <strong>Microsoft</strong>
-                    </div>
-                    <div class="meta-item">
-                        <span>🐳</span>
-                        <strong>Docker</strong>
-                    </div>
-                </div>
-                <a href="https://github.com/microsoft/vscode-remote-release" target="_blank" class="repo-link">
-                    Kunjungi Repository →
-                </a>
-            </div>
-
-            <!-- Repository 2: Fullstack App -->
-            <div class="repo-card">
-                <div class="repo-header">
-                    <div class="repo-icon">⚛️</div>
-                    <div class="repo-name">fullstack-app-complete</div>
-                </div>
-                <p class="repo-description">
-                    Complete Full-Stack Application - React + Node.js + PostgreSQL with Auto Setup
-                </p>
-                <div class="repo-id">
-                    <strong>ID:</strong> 1392452469
-                </div>
-                <div class="languages">
-                    <div class="languages-title">📊 Language Composition</div>
-                    <div class="language-item">
-                        <span class="language-name">JavaScript</span>
-                        <div class="language-bar">
-                            <div class="language-fill" style="width: 88.7%;">88.7%</div>
-                        </div>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-name">Shell</span>
-                        <div class="language-bar">
-                            <div class="language-fill" style="width: 6.9%; background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);">6.9%</div>
-                        </div>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-name">CSS</span>
-                        <div class="language-bar">
-                            <div class="language-fill" style="width: 3.2%; background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);">3.2%</div>
-                        </div>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-name">HTML</span>
-                        <div class="language-bar">
-                            <div class="language-fill" style="width: 1.2%; background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);">1.2%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="repo-meta">
-                    <div class="meta-item">
-                        <span>💻</span>
-                        <strong>Full Stack</strong>
-                    </div>
-                    <div class="meta-item">
-                        <span>🗄️</span>
-                        <strong>PostgreSQL</strong>
-                    </div>
-                </div>
-                <a href="https://github.com/bayangsemu-ui/fullstack-app-complete" target="_blank" class="repo-link">
-                    Kunjungi Repository →
-                </a>
-            </div>
-
-            <!-- Repository 3: METATRON Power -->
-            <div class="repo-card">
-                <div class="repo-header">
-                    <div class="repo-icon">🤖</div>
-                    <div class="repo-name">METATRON-power</div>
-                </div>
-                <p class="repo-description">
-                    AI-powered penetration testing assistant using local LLM on linux (Parrot OS)
-                </p>
-                <div class="repo-id">
-                    <strong>ID:</strong> 1390670038
-                </div>
-                <div class="languages">
-                    <div class="no-languages">
-                        ℹ️ Language composition data tidak tersedia
-                    </div>
-                </div>
-                <div class="repo-meta">
-                    <div class="meta-item">
-                        <span>🔒</span>
-                        <strong>Security</strong>
-                    </div>
-                    <div class="meta-item">
-                        <span>🐧</span>
-                        <strong>Linux</strong>
-                    </div>
-                </div>
-                <a href="https://github.com/bayangsemu-ui/METATRON-power" target="_blank" class="repo-link">
-                    Kunjungi Repository →
-                </a>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <p>
-                <strong>Bayangsemu UI</strong> - GitHub Repository Portfolio
-            </p>
-            <p style="margin-top: 15px;">
-                <a href="https://github.com/bayangsemu-ui" target="_blank">🔗 GitHub Profile</a>
-                <a href="https://github.com/bayangsemu-ui?tab=repositories" target="_blank">📚 All Repositories</a>
-            </p>
-            <p style="margin-top: 20px; font-size: 0.9em;">
-                © 2024 - Created with ❤️ | Responsive Web Design
-            </p>
-        </footer>
+      </footer>
     </div>
-</body>
+  </body>
 </html>
